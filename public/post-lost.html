@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Post Lost Item - College Lost &amp; Found</title>
+<!-- Tailwind CSS v3 with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        :root {
+            --primary: #0d6cf2;
+            --primary-dark: #0a56c2;
+            --radius: 0.5rem; /* ROUND_EIGHT */
+        }
+    </style>
+<script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0d6cf2',
+                    },
+                    borderRadius: {
+                        'custom': '0.5rem',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 min-h-screen text-gray-900 antialiased">
+<!-- BEGIN: MainHeader -->
+<header class="bg-white border-b border-gray-200 sticky top-0 z-50 px-4 py-4 flex items-center justify-between shadow-sm" data-purpose="sticky-header">
+<div class="flex items-center gap-4 max-w-xl mx-auto w-full">
+<!-- Back Button -->
+<button onclick="window.location.href='index.html'" aria-label="Go back" class="p-2 -ml-2 hover:bg-gray-100 rounded-full transition-colors" type="button">
+<svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+<h1 class="text-lg font-bold text-gray-900">Post Lost Item</h1>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: ContentContainer -->
+<main class="max-w-xl mx-auto p-4 sm:p-6">
+<!-- Introduction Text -->
+<section class="mb-8" data-purpose="form-intro">
+<h2 class="text-2xl font-bold text-gray-900 mb-2">Found something?</h2>
+<p class="text-gray-500 text-sm leading-relaxed">Please provide as much detail as possible to help the owner find their item. Your report will be visible to students across campus.</p>
+</section>
+<!-- BEGIN: LostItemForm -->
+<form class="space-y-8" data-purpose="submission-form" id="lost-item-form">
+<!-- Section 1: Item Details -->
+<div class="bg-white p-5 rounded-custom border border-gray-200 shadow-sm space-y-5">
+<div class="flex items-center gap-2 mb-2">
+<span class="flex items-center justify-center w-6 h-6 bg-primary/10 text-primary rounded-full text-xs font-bold">1</span>
+<h3 class="text-sm font-semibold text-gray-900 uppercase tracking-wide">Item Information</h3>
+</div>
+<div class="space-y-4">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1.5" for="item-name">Item Name</label>
+<input class="block w-full rounded-custom border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm p-3 border transition-shadow" id="item-name" name="item-name" placeholder="e.g. Blue Hydroflask, MacBook Pro" required="" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1.5" for="category">Category</label>
+<div class="relative">
+<select class="block w-full rounded-custom border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm p-3 border appearance-none bg-white transition-shadow" id="category" name="category" required="">
+<option value="">Select a category</option>
+<option value="electronics">Electronics</option>
+<option value="clothing">Clothing &amp; Accessories</option>
+<option value="books">Books &amp; Stationery</option>
+<option value="keys">Keys</option>
+<option value="wallets">Wallets &amp; Bags</option>
+<option value="other">Other</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-500">
+<svg class="h-4 w-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1.5" for="description">Detailed Description</label>
+<textarea class="block w-full rounded-custom border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm p-3 border transition-shadow" id="description" name="description" placeholder="Describe specific features, stickers, damage, or contents..." required="" rows="3"></textarea>
+</div>
+</div>
+</div>
+<!-- Section 2: Logistics -->
+<div class="bg-white p-5 rounded-custom border border-gray-200 shadow-sm space-y-5">
+<div class="flex items-center gap-2 mb-2">
+<span class="flex items-center justify-center w-6 h-6 bg-primary/10 text-primary rounded-full text-xs font-bold">2</span>
+<h3 class="text-sm font-semibold text-gray-900 uppercase tracking-wide">Discovery Details</h3>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1.5" for="location">Location Found</label>
+<input class="block w-full rounded-custom border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm p-3 border transition-shadow" id="location" name="location" placeholder="e.g. Student Union" required="" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1.5" for="date-found">Date Found</label>
+<input class="block w-full rounded-custom border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm p-3 border transition-shadow" id="date-found" name="date-found" required="" type="date"/>
+</div>
+</div>
+<div data-purpose="image-upload-group">
+<label class="block text-sm font-medium text-gray-700 mb-1.5">Item Photos</label>
+<div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-200 border-dashed rounded-custom hover:border-primary/50 hover:bg-primary/5 transition-all cursor-pointer bg-gray-50/50">
+<div class="space-y-2 text-center">
+<svg aria-hidden="true" class="mx-auto h-10 w-10 text-gray-400" fill="none" stroke="currentColor" viewbox="0 0 48 48">
+<path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<div class="flex text-sm text-gray-600 justify-center">
+<label class="relative cursor-pointer font-semibold text-primary hover:text-primary/80 focus-within:outline-none" for="file-upload">
+<span>Upload a photo</span>
+<input accept="image/*" class="sr-only" id="file-upload" name="file-upload" type="file"/>
+</label>
+<p class="pl-1">or drag and drop</p>
+</div>
+<p class="text-xs text-gray-400">Up to 10MB (PNG, JPG, GIF)</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 3: Contact -->
+<div class="bg-primary/5 p-5 rounded-custom border border-primary/20 space-y-5">
+<div class="flex items-center gap-2 mb-2">
+<span class="flex items-center justify-center w-6 h-6 bg-primary text-white rounded-full text-xs font-bold">3</span>
+<h3 class="text-sm font-semibold text-primary uppercase tracking-wide">Your Contact Info</h3>
+</div>
+<div class="space-y-4">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1.5" for="contact-name">Full Name</label>
+<input class="block w-full rounded-custom border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm p-3 border transition-shadow bg-white" id="contact-name" name="contact-name" placeholder="John Doe" required="" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1.5" for="contact-email">College Email</label>
+<input class="block w-full rounded-custom border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm p-3 border transition-shadow bg-white" id="contact-email" name="contact-email" placeholder="student@college.edu" required="" type="email"/>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="pt-2 flex flex-col gap-3" data-purpose="form-actions">
+<button class="w-full bg-primary hover:bg-primary-dark text-white font-bold py-4 px-4 rounded-custom shadow-lg shadow-primary/20 transform transition active:scale-[0.98] focus:outline-none focus:ring-4 focus:ring-primary/30" type="submit">
+                    Submit Lost Item Report
+                </button>
+<button onclick="window.location.href='index.html'" class="w-full bg-white border border-gray-300 text-gray-600 font-semibold py-3 px-4 rounded-custom hover:bg-gray-50 hover:text-gray-900 transition-all" type="button">
+                    Cancel and Exit
+                </button>
+</div>
+</form>
+<!-- END: LostItemForm -->
+</main>
+<!-- END: ContentContainer -->
+<!-- BEGIN: Footer -->
+<footer class="mt-8 pb-12 flex items-center justify-center text-gray-400 text-xs" data-purpose="simple-footer">
+        © 2023 University Lost &amp; Found System
+    </footer>
+<!-- END: Footer -->
+<script data-purpose="form-interactivity">
+        // File input visual feedback
+        const fileInput = document.getElementById('file-upload');
+        let imageSrc = null;
+
+        fileInput.addEventListener('change', function() {
+            if (this.files && this.files.length > 0) {
+                const dropzone = this.closest('div.border-dashed');
+                dropzone.classList.add('border-primary', 'bg-primary/5');
+                const p = dropzone.querySelector('p.text-xs');
+                p.textContent = 'Selected: ' + this.files[0].name;
+                p.classList.replace('text-gray-400', 'text-primary');
+
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imageSrc = e.target.result;
+                }
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+
+        document.getElementById('lost-item-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const submitBtn = this.querySelector('button[type="submit"]');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+            
+            const formData = new FormData();
+            formData.append('type', 'lost');
+            formData.append('title', document.getElementById('item-name').value);
+            formData.append('category', document.getElementById('category').value);
+            formData.append('description', document.getElementById('description').value);
+            formData.append('location', document.getElementById('location').value);
+            formData.append('date', document.getElementById('date-found').value);
+            formData.append('contact_name', document.getElementById('contact-name').value || 'Anonymous');
+            formData.append('contact_email', document.getElementById('contact-email').value);
+            
+            const fileInputElem = document.getElementById('file-upload');
+            if (fileInputElem.files.length > 0) {
+                formData.append('image', fileInputElem.files[0]);
+            }
+            
+            try {
+                const res = await fetch('/api/items', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (res.ok) {
+                    alert('Lost item reported successfully!');
+                    window.location.href = 'items.html';
+                } else {
+                    const data = await res.json();
+                    alert('Error submitting report: ' + (data.error || 'Unknown error. Make sure Supabase is configured in .env'));
+                }
+            } catch (err) {
+                alert('Error network request failed: ' + err.message);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Submit Lost Item Report';
+            }
+        });
+    </script>
+</body></html>

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Campus Lost & Found</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-gray-50 text-slate-800 antialiased overflow-hidden flex h-screen">
+
+    <!-- Sidebar Navigation -->
+    <aside class="w-64 bg-slate-900 text-slate-300 flex flex-col transition-all duration-300 z-20 flex-shrink-0 hidden md:flex">
+        <div class="h-16 flex items-center px-6 border-b border-slate-800">
+            <div class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center mr-3 shadow-lg shadow-blue-500/30">
+                <span class="text-white font-bold text-xs uppercase tracking-wider">LF</span>
+            </div>
+            <span class="text-white text-lg font-bold tracking-tight">Admin Portal</span>
+        </div>
+        <nav class="flex-1 py-6 px-4 space-y-2">
+            <a href="#" class="flex items-center px-4 py-3 bg-blue-600/10 text-blue-400 rounded-xl transition-colors group">
+                <svg class="w-5 h-5 mr-3 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                <span class="font-medium text-sm">Overview Base</span>
+            </a>
+            <a href="index.html" class="flex items-center px-4 py-3 hover:bg-slate-800 rounded-xl transition-colors group">
+                <svg class="w-5 h-5 mr-3 text-slate-500 group-hover:text-slate-300 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                <span class="font-medium text-sm">Public Site</span>
+            </a>
+        </nav>
+        <div class="p-4 border-t border-slate-800">
+            <button onclick="logout()" class="w-full flex items-center justify-center px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-white text-sm font-medium rounded-xl transition-all active:scale-95 shadow-md">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                Log Out
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content wrapper -->
+    <div class="flex-1 flex flex-col h-screen overflow-hidden">
+        
+        <!-- Top Header for Mobile & Actions -->
+        <header class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6 z-10 flex-shrink-0 shadow-sm">
+            <div class="flex items-center md:hidden">
+                <div class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center mr-3">
+                    <span class="text-white font-bold text-xs">LF</span>
+                </div>
+                <h1 class="text-lg font-bold text-slate-800">Admin</h1>
+            </div>
+            
+            <div class="hidden md:flex items-center">
+                <h2 class="text-xl font-bold text-slate-800 tracking-tight">Reported Items Database</h2>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <span class="text-sm text-slate-500 font-medium hidden sm:block">Welcome, Admin</span>
+                <div class="w-9 h-9 bg-slate-100 border border-slate-200 rounded-full flex items-center justify-center text-slate-600">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                </div>
+                <!-- Mobile Logout -->
+                <button onclick="logout()" class="md:hidden text-slate-500 p-2 hover:bg-slate-100 rounded-lg transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Scrollable Area -->
+        <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-50/50 p-6 no-scrollbar">
+            
+            <!-- Dashboard Stats Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] flex items-center space-x-4">
+                    <div class="w-12 h-12 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg></div>
+                    <div>
+                        <p class="text-sm font-medium text-slate-500 mb-1">Total Entries</p>
+                        <h4 class="text-2xl font-black text-slate-800 tracking-tight" id="stat-total">--</h4>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] flex items-center space-x-4">
+                    <div class="w-12 h-12 rounded-full bg-emerald-50 text-emerald-500 flex items-center justify-center"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
+                    <div>
+                        <p class="text-sm font-medium text-slate-500 mb-1">Found Reported</p>
+                        <h4 class="text-2xl font-black text-slate-800 tracking-tight" id="stat-found">--</h4>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] flex items-center space-x-4">
+                    <div class="w-12 h-12 rounded-full bg-rose-50 text-rose-500 flex items-center justify-center"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
+                    <div>
+                        <p class="text-sm font-medium text-slate-500 mb-1">Lost Reported</p>
+                        <h4 class="text-2xl font-black text-slate-800 tracking-tight" id="stat-lost">--</h4>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] flex items-center space-x-4">
+                    <div class="w-12 h-12 rounded-full bg-indigo-50 text-indigo-500 flex items-center justify-center"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
+                    <div>
+                        <p class="text-sm font-medium text-slate-500 mb-1">Resolved</p>
+                        <h4 class="text-2xl font-black text-slate-800 tracking-tight" id="stat-resolved">--</h4>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Table Container -->
+            <div class="bg-white rounded-2xl shadow-[0_2px_20px_-5px_rgba(6,81,237,0.05)] border border-gray-100 overflow-hidden flex flex-col">
+                <div class="px-6 py-5 border-b border-gray-100 flex justify-between items-center bg-white/50 backdrop-blur-sm">
+                    <h3 class="font-bold text-lg text-slate-800">Recent Submissions</h3>
+                    <button onclick="fetchAdminItems()" class="text-sm text-blue-600 font-semibold hover:text-blue-700 flex items-center transition-colors">
+                        <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                        Refresh
+                    </button>
+                </div>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse min-w-max">
+                        <thead>
+                            <tr class="bg-gray-50/80 text-xs uppercase tracking-wider text-slate-500 border-b border-gray-100">
+                                <th class="px-6 py-4 font-bold">Item Info</th>
+                                <th class="px-6 py-4 font-bold">Contact</th>
+                                <th class="px-6 py-4 font-bold">Location & Date</th>
+                                <th class="px-6 py-4 font-bold">Type</th>
+                                <th class="px-6 py-4 font-bold">Status</th>
+                                <th class="px-6 py-4 font-bold text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-table-body" class="divide-y divide-gray-100 text-sm">
+                            <tr><td colspan="6" class="px-6 py-12 text-center text-slate-400 font-medium">
+                                <div class="flex flex-col items-center justify-center">
+                                    <svg class="w-8 h-8 mb-3 animate-spin text-blue-500" fill="none" viewBox="0 0 24 24">
+                                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                    </svg>
+                                    Loading Database Records...
+                                </div>
+                            </td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Footer spacing -->
+            <div class="h-12"></div>
+        </main>
+    </div>
+
+    <!-- Confirmation Modal Overlay -->
+    <div id="delete-modal" class="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden transform scale-95 transition-transform duration-300 mx-4" id="delete-modal-panel">
+            <div class="px-6 py-6 sm:p-8">
+                <div class="w-12 h-12 rounded-full bg-red-100 text-red-600 flex items-center justify-center mb-5">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                </div>
+                <h3 class="text-xl font-bold text-slate-800 mb-2">Delete Item Permanently?</h3>
+                <p class="text-slate-500 text-sm mb-6 leading-relaxed">This action cannot be undone. This will permanently remove the item from the Supabase database. Are you absolutely certain?</p>
+                <div class="flex space-x-3">
+                    <button onclick="closeDeleteModal()" class="flex-1 px-4 py-2.5 bg-white border border-slate-300 text-slate-700 font-semibold rounded-xl hover:bg-slate-50 transition-colors">Cancel</button>
+                    <button id="confirm-delete-btn" class="flex-1 px-4 py-2.5 bg-red-600 text-white font-semibold rounded-xl hover:bg-red-700 shadow-md shadow-red-600/20 transition-all active:scale-95">Yes, Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 translate-y-[150%] transition-transform duration-300 z-50 bg-slate-800 text-white px-5 py-3 rounded-xl shadow-xl flex items-center space-x-3">
+        <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+        <span id="toast-msg" class="text-sm font-medium">Action successful</span>
+    </div>
+
+    <script>
+        const token = localStorage.getItem('adminToken');
+        if (!token) window.location.href = 'admin-login.html';
+
+        let deleteTargetId = null;
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-msg').textContent = message;
+            toast.classList.remove('translate-y-[150%]');
+            setTimeout(() => toast.classList.add('translate-y-[150%]'), 3000);
+        }
+
+        async function fetchAdminItems() {
+            try {
+                const res = await fetch('/api/admin/items', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (res.status === 401 || res.status === 403) {
+                    window.location.href = 'admin-login.html';
+                    return;
+                }
+                const responseData = await res.json();
+                const items = Array.isArray(responseData) ? responseData : (responseData.data || []);
+                
+                const tbody = document.getElementById('admin-table-body');
+                tbody.innerHTML = '';
+                
+                // Update Dashboard Statistics
+                let total = items.length;
+                let found = 0, lost = 0, resolved = 0;
+                
+                if (total === 0) {
+                    tbody.innerHTML = '<tr><td colspan="6" class="px-6 py-16 text-center text-slate-400 font-medium text-base"><br/><br/>No submissions exist in the database.</td></tr>';
+                } else {
+                    items.forEach(item => {
+                        if (item.type === 'found') found++;
+                        if (item.type === 'lost') lost++;
+                        if (item.status === 'resolved') resolved++;
+
+                        const typeBadge = item.type === 'found' 
+                            ? '<span class="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider bg-emerald-50 text-emerald-600 border border-emerald-200/50">Found</span>'
+                            : '<span class="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider bg-rose-50 text-rose-600 border border-rose-200/50">Lost</span>';
+
+                        const statusBadge = item.status === 'resolved'
+                            ? '<span class="inline-flex items-center space-x-1.5"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span><span class="text-xs font-semibold text-blue-700">Resolved</span></span>'
+                            : '<span class="inline-flex items-center space-x-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span><span class="text-xs font-semibold text-slate-600">Active</span></span>';
+                        
+                        // Parse Date safely
+                        const dateFormatted = item.item_date ? new Date(item.item_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Unknown Date';
+                        
+                        // Image Thumbnail
+                        const imgThumbnail = item.image_url 
+                            ? `<img src="${item.image_url}" class="w-10 h-10 rounded-lg object-cover shadow-sm bg-slate-100"/>`
+                            : `<div class="w-10 h-10 rounded-lg bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-300"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg></div>`;
+
+                        const row = `
+                            <tr class="hover:bg-[var(--tw-colors-blue-50)/30] transition-colors border-b border-gray-50/50 group">
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center space-x-4">
+                                        ${imgThumbnail}
+                                        <div>
+                                            <p class="font-bold text-slate-800 text-sm max-w-[200px] truncate" title="${item.title}">${item.title}</p>
+                                            <p class="text-xs text-slate-500 font-medium mt-0.5">${item.category}</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <p class="text-sm font-semibold text-slate-700">${item.contact_name}</p>
+                                    <p class="text-xs text-slate-500 truncate max-w-[150px]"><a href="mailto:${item.contact_email}" class="hover:text-blue-600">${item.contact_email}</a></p>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <div class="flex flex-col space-y-1 text-xs">
+                                        <div class="flex items-center text-slate-600"><svg class="w-3.5 h-3.5 mr-1 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg><span class="truncate max-w-[130px] font-medium">${item.location}</span></div>
+                                        <div class="flex items-center text-slate-500"><svg class="w-3.5 h-3.5 mr-1 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>${dateFormatted}</div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    ${typeBadge}
+                                </td>
+                                <td class="px-6 py-4">
+                                    ${statusBadge}
+                                </td>
+                                <td class="px-6 py-4 text-right space-x-2 whitespace-nowrap opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity">
+                                    ${item.status !== 'resolved' ? `<button onclick="resolveItem('${item.id}')" class="inline-flex items-center justify-center p-2 rounded-lg text-blue-600 hover:bg-blue-50 transition-colors" title="Mark Resolved"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></button>` : ''}
+                                    <button onclick="openDeleteModal('${item.id}')" class="inline-flex items-center justify-center p-2 rounded-lg text-red-500 hover:bg-red-50 transition-colors" title="Delete Permanent"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
+                                </td>
+                            </tr>
+                        `;
+                        tbody.insertAdjacentHTML('beforeend', row);
+                    });
+                }
+                
+                // Inject stats
+                document.getElementById('stat-total').textContent = total;
+                document.getElementById('stat-found').textContent = found;
+                document.getElementById('stat-lost').textContent = lost;
+                document.getElementById('stat-resolved').textContent = resolved;
+
+            } catch(e) { console.error('Error fetching admin items', e); }
+        }
+
+        async function resolveItem(id) {
+            try {
+                await fetch(`/api/admin/items/${id}`, {
+                    method: 'PATCH',
+                    headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ status: 'resolved' })
+                });
+                showToast("Item marked as resolved");
+                fetchAdminItems();
+            } catch(e) { alert('Error updating item'); }
+        }
+
+        // Modal Logic
+        const modal = document.getElementById('delete-modal');
+        const modalPanel = document.getElementById('delete-modal-panel');
+        
+        function openDeleteModal(id) {
+            deleteTargetId = id;
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modalPanel.classList.remove('scale-95');
+        }
+
+        function closeDeleteModal() {
+            deleteTargetId = null;
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modalPanel.classList.add('scale-95');
+        }
+
+        document.getElementById('confirm-delete-btn').addEventListener('click', async () => {
+            if(!deleteTargetId) return;
+            const btn = document.getElementById('confirm-delete-btn');
+            const originalText = btn.textContent;
+            btn.textContent = 'Deleting...';
+            btn.disabled = true;
+
+            try {
+                await fetch(`/api/admin/items/${deleteTargetId}`, {
+                    method: 'DELETE',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                closeDeleteModal();
+                showToast("Item deleted permanently");
+                fetchAdminItems();
+            } catch(e) { 
+                alert('Error deleting item'); 
+            } finally {
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }
+        });
+
+        // Close on overlay click
+        modal.addEventListener('click', (e) => {
+            if(e.target === modal) closeDeleteModal();
+        });
+
+        function logout() {
+            localStorage.removeItem('adminToken');
+            window.location.href = 'admin-login.html';
+        }
+
+        fetchAdminItems();
+    </script>
+</body>
+</html>

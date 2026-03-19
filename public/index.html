@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>College Lost &amp; Found System</title>
+<!-- Tailwind CSS v3 CDN with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Configuration for custom colors if needed -->
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              light: '#dbeafe',
+              DEFAULT: '#0d6cf2',
+              dark: '#0a56c2',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          borderRadius: {
+            'custom': '8px',
+          }
+        }
+      }
+    }
+  </script>
+<!-- Custom CSS for specific component adjustments -->
+<style data-purpose="layout-refinements">
+    body {
+      -webkit-tap-highlight-color: transparent;
+      scroll-behavior: smooth;
+    }
+    .hero-gradient {
+      background: linear-gradient(160deg, #0d6cf2 0%, #063c8a 100%);
+    }
+    .item-card-hover:hover {
+      transform: translateY(-4px);
+    }
+    .btn-transition {
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .fade-in-up {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans leading-normal">
+<!-- BEGIN: Navigation -->
+<nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200" data-purpose="main-navigation">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between h-16">
+<!-- Logo Section -->
+<div class="flex items-center">
+<div class="flex-shrink-0 flex items-center gap-2">
+<div class="w-9 h-9 bg-brand rounded-custom flex items-center justify-center text-white shadow-sm">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
+</svg>
+</div>
+<span class="font-extrabold text-xl tracking-tight text-brand">UniFound</span>
+</div>
+</div>
+<!-- Navigation Links (Mobile Optimized Layout) -->
+<div class="flex items-center space-x-6">
+<a class="text-sm font-semibold text-brand border-b-2 border-brand px-1 pt-1" href="index.html">Home</a>
+<a class="text-sm font-semibold text-slate-500 hover:text-brand px-1 pt-1 transition-colors" href="items.html">Items</a>
+<a class="text-sm font-semibold text-slate-500 hover:text-brand px-1 pt-1 transition-colors" href="post-found.html">Post</a>
+</div>
+</div>
+</div>
+</nav>
+<!-- END: Navigation -->
+<main>
+<!-- BEGIN: Hero Section -->
+<section class="hero-gradient text-white py-16 px-4 overflow-hidden relative" data-purpose="hero-banner">
+<div class="max-w-7xl mx-auto text-center relative z-10 fade-in-up">
+<h1 class="text-4xl font-extrabold sm:text-5xl md:text-6xl mb-4 tracking-tight">
+          Lost something? <br class="sm:hidden"/>Found something?
+        </h1>
+<p class="text-blue-100 text-lg md:text-xl mb-10 max-w-2xl mx-auto font-medium opacity-90">
+          The central hub for reclaiming lost belongings on campus. Reconnecting students with their essentials, faster.
+        </p>
+<!-- Search Bar -->
+<div class="max-w-xl mx-auto mb-10 relative group" data-purpose="hero-search">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<svg class="h-5 w-5 text-slate-400 group-focus-within:text-brand transition-colors" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
+</svg>
+</div>
+<input id="hero-search-input" class="block w-full pl-12 pr-4 py-4 border border-transparent rounded-custom leading-5 bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-4 focus:ring-brand/30 shadow-2xl text-base" placeholder="Search for items (e.g. 'Blue Wallet')" type="text"/>
+</div>
+<!-- Call to Action Buttons -->
+<div class="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6" data-purpose="hero-ctas">
+<button onclick="window.location.href='post-lost.html'" class="bg-white text-brand font-bold py-4 px-10 rounded-custom shadow-xl hover:shadow-2xl btn-transition active:scale-95 text-lg">
+            Report Lost Item
+          </button>
+<button onclick="window.location.href='post-found.html'" class="bg-brand-dark/40 backdrop-blur-sm text-white font-bold py-4 px-10 rounded-custom shadow-xl border border-white/20 hover:bg-brand-dark/60 btn-transition active:scale-95 text-lg">
+            Report Found Item
+          </button>
+</div>
+</div>
+<!-- Subtle Background Decoration -->
+<div class="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 bg-white/5 rounded-full blur-3xl"></div>
+<div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-brand-light/10 rounded-full blur-3xl"></div>
+</section>
+<!-- END: Hero Section -->
+<!-- BEGIN: Recent Items Preview -->
+<section class="py-16 px-4 max-w-7xl mx-auto" data-purpose="recent-items-feed">
+<div class="flex items-end justify-between mb-10">
+<div>
+<h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">Recent Items</h2>
+<p class="text-slate-500 mt-1 font-medium">Discover what's been turned in lately</p>
+</div>
+<a class="text-brand font-bold text-sm hover:translate-x-1 transition-transform inline-flex items-center gap-1" href="items.html">
+        View All 
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+</a>
+</div>
+<!-- Item Grid -->
+<div id="recent-items-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+<!-- Found Item Card Example -->
+<div class="bg-white rounded-custom shadow-sm border border-slate-200 overflow-hidden flex flex-col item-card-hover btn-transition group cursor-pointer" data-purpose="item-card">
+<div class="relative aspect-[4/3] bg-slate-100 overflow-hidden">
+<img alt="Lost Item" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="assets/img/item_1.jpg"/>
+<span class="absolute top-4 left-4 bg-emerald-500 text-white text-[10px] font-bold px-2 py-1 rounded-sm uppercase tracking-widest shadow-lg">Found</span>
+</div>
+<div class="p-5 flex-grow">
+<h3 class="font-bold text-xl mb-2 text-slate-800 group-hover:text-brand transition-colors">Blue Hydroflask</h3>
+<p class="text-slate-500 text-sm mb-4 line-clamp-2 font-medium">Found near the Main Library entrance. Has some stickers on it.</p>
+<div class="flex items-center text-xs text-slate-400 font-semibold uppercase tracking-wide gap-1.5">
+<svg class="h-4 w-4 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span>Main Library</span>
+</div>
+</div>
+<div class="px-5 py-4 bg-slate-50/50 border-t border-slate-100 flex justify-between items-center">
+<span class="text-xs text-slate-400 font-medium">2 hours ago</span>
+<button onclick="window.location.href='item-details.html'" class="text-brand text-sm font-extrabold uppercase tracking-tight group-hover:underline">Details</button>
+</div>
+</div>
+<!-- Lost Item Card Example -->
+<div class="bg-white rounded-custom shadow-sm border border-slate-200 overflow-hidden flex flex-col item-card-hover btn-transition group cursor-pointer" data-purpose="item-card">
+<div class="relative aspect-[4/3] bg-slate-100 overflow-hidden">
+<img alt="Lost Item" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="assets/img/item_2.jpg"/>
+<span class="absolute top-4 left-4 bg-rose-500 text-white text-[10px] font-bold px-2 py-1 rounded-sm uppercase tracking-widest shadow-lg">Lost</span>
+</div>
+<div class="p-5 flex-grow">
+<h3 class="font-bold text-xl mb-2 text-slate-800 group-hover:text-brand transition-colors">AirPods Pro Case</h3>
+<p class="text-slate-500 text-sm mb-4 line-clamp-2 font-medium">Dropped somewhere in the Science Building cafeteria.</p>
+<div class="flex items-center text-xs text-slate-400 font-semibold uppercase tracking-wide gap-1.5">
+<svg class="h-4 w-4 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span>Science Building</span>
+</div>
+</div>
+<div class="px-5 py-4 bg-slate-50/50 border-t border-slate-100 flex justify-between items-center">
+<span class="text-xs text-slate-400 font-medium">5 hours ago</span>
+<button onclick="window.location.href='item-details.html'" class="text-brand text-sm font-extrabold uppercase tracking-tight group-hover:underline">Details</button>
+</div>
+</div>
+<!-- Found Item Card Example -->
+<div class="bg-white rounded-custom shadow-sm border border-slate-200 overflow-hidden flex flex-col item-card-hover btn-transition group cursor-pointer" data-purpose="item-card">
+<div class="relative aspect-[4/3] bg-slate-100 overflow-hidden">
+<img alt="Lost Item" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="assets/img/item_3.jpg"/>
+<span class="absolute top-4 left-4 bg-emerald-500 text-white text-[10px] font-bold px-2 py-1 rounded-sm uppercase tracking-widest shadow-lg">Found</span>
+</div>
+<div class="p-5 flex-grow">
+<h3 class="font-bold text-xl mb-2 text-slate-800 group-hover:text-brand transition-colors">Toyota Car Keys</h3>
+<p class="text-slate-500 text-sm mb-4 line-clamp-2 font-medium">Found on the bench outside the Student Union.</p>
+<div class="flex items-center text-xs text-slate-400 font-semibold uppercase tracking-wide gap-1.5">
+<svg class="h-4 w-4 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span>Student Union</span>
+</div>
+</div>
+<div class="px-5 py-4 bg-slate-50/50 border-t border-slate-100 flex justify-between items-center">
+<span class="text-xs text-slate-400 font-medium">Yesterday</span>
+<button onclick="window.location.href='item-details.html'" class="text-brand text-sm font-extrabold uppercase tracking-tight group-hover:underline">Details</button>
+</div>
+</div>
+<!-- Lost Item Card Example -->
+<div class="bg-white rounded-custom shadow-sm border border-slate-200 overflow-hidden flex flex-col item-card-hover btn-transition group cursor-pointer" data-purpose="item-card">
+<div class="relative aspect-[4/3] bg-slate-100 overflow-hidden">
+<img alt="Lost Item" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="assets/img/item_4.jpg"/>
+<span class="absolute top-4 left-4 bg-rose-500 text-white text-[10px] font-bold px-2 py-1 rounded-sm uppercase tracking-widest shadow-lg">Lost</span>
+</div>
+<div class="p-5 flex-grow">
+<h3 class="font-bold text-xl mb-2 text-slate-800 group-hover:text-brand transition-colors">TI-84 Calculator</h3>
+<p class="text-slate-500 text-sm mb-4 line-clamp-2 font-medium">Lost in Math Hall 302. Name "Alex" written on back.</p>
+<div class="flex items-center text-xs text-slate-400 font-semibold uppercase tracking-wide gap-1.5">
+<svg class="h-4 w-4 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span>Mathematics Hall</span>
+</div>
+</div>
+<div class="px-5 py-4 bg-slate-50/50 border-t border-slate-100 flex justify-between items-center">
+<span class="text-xs text-slate-400 font-medium">Yesterday</span>
+<button onclick="window.location.href='item-details.html'" class="text-brand text-sm font-extrabold uppercase tracking-tight group-hover:underline">Details</button>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Recent Items Preview -->
+</main>
+<!-- BEGIN: Footer -->
+<footer class="bg-white border-t border-slate-200 mt-12 py-12 px-4" data-purpose="main-footer">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-brand rounded-custom flex items-center justify-center text-white text-xs font-bold shadow-sm">UF</div>
+<span class="font-extrabold text-slate-800 tracking-tight text-lg">UniFound © 2023</span>
+</div>
+<div class="flex space-x-8 text-sm text-slate-500 font-semibold">
+<a class="hover:text-brand btn-transition" href="#">Privacy Policy</a>
+<a class="hover:text-brand btn-transition" href="#">Terms of Service</a>
+<a class="hover:text-brand btn-transition" href="#">Contact Support</a>
+</div>
+</div>
+</footer>
+<!-- END: Footer -->
+<!-- Contact Modal -->
+<div id="contact-modal" class="fixed inset-0 z-[100] hidden items-center justify-center pointer-events-none">
+    <div id="contact-modal-backdrop" class="absolute inset-0 bg-slate-900/40 backdrop-blur-sm opacity-0 transition-opacity duration-300 pointer-events-auto"></div>
+    <div id="contact-modal-content" class="bg-white rounded-2xl shadow-2xl w-[90%] max-w-sm p-6 relative z-10 transform scale-95 opacity-0 transition-all duration-300 pointer-events-auto border border-slate-100">
+        <button id="close-modal-btn" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 p-1 rounded-full hover:bg-slate-100 transition-colors">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+        <div class="text-center">
+            <div class="w-12 h-12 bg-brand/10 rounded-full flex items-center justify-center mx-auto mb-4 text-brand">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+            </div>
+            <h3 class="text-lg font-bold text-slate-800 mb-1">Contact Details</h3>
+            <p class="text-sm text-slate-500 mb-6 font-medium">Use this email to contact the owner</p>
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 mb-5 break-all">
+                <span id="modal-email-text" class="text-slate-900 font-bold text-base tracking-wide"></span>
+            </div>
+            <button id="copy-email-btn" class="w-full bg-brand hover:bg-brand-dark text-white font-bold py-3 px-4 rounded-xl shadow-md shadow-brand/20 transition-all active:scale-[0.98] flex items-center justify-center gap-2">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                Copy Email
+            </button>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+function showContactModal(email) {
+    const modal = document.getElementById('contact-modal');
+    const backdrop = document.getElementById('contact-modal-backdrop');
+    const content = document.getElementById('contact-modal-content');
+    document.getElementById('modal-email-text').textContent = email;
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    setTimeout(() => {
+        backdrop.classList.remove('opacity-0');
+        backdrop.classList.add('opacity-100');
+        content.classList.remove('opacity-0', 'scale-95');
+        content.classList.add('opacity-100', 'scale-100');
+    }, 10);
+}
+function hideContactModal() {
+    const modal = document.getElementById('contact-modal');
+    const backdrop = document.getElementById('contact-modal-backdrop');
+    const content = document.getElementById('contact-modal-content');
+    backdrop.classList.remove('opacity-100');
+    backdrop.classList.add('opacity-0');
+    content.classList.remove('opacity-100', 'scale-100');
+    content.classList.add('opacity-0', 'scale-95');
+    setTimeout(() => {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+    }, 300);
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+    // Modal Listeners
+    const closeBtn = document.getElementById('close-modal-btn');
+    const backdrop = document.getElementById('contact-modal-backdrop');
+    const copyBtn = document.getElementById('copy-email-btn');
+    if (closeBtn) closeBtn.addEventListener('click', hideContactModal);
+    if (backdrop) backdrop.addEventListener('click', hideContactModal);
+    if (copyBtn) {
+        copyBtn.addEventListener('click', async () => {
+            const email = document.getElementById('modal-email-text').textContent;
+            try {
+                await navigator.clipboard.writeText(email);
+                const originalText = copyBtn.innerHTML;
+                copyBtn.innerHTML = '<svg class="h-4 w-4 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg> Copied!';
+                copyBtn.classList.remove('bg-brand', 'hover:bg-brand-dark');
+                copyBtn.classList.add('bg-emerald-500', 'hover:bg-emerald-600', 'shadow-emerald-500/20');
+                setTimeout(() => {
+                    copyBtn.innerHTML = originalText;
+                    copyBtn.classList.add('bg-brand', 'hover:bg-brand-dark');
+                    copyBtn.classList.remove('bg-emerald-500', 'hover:bg-emerald-600', 'shadow-emerald-500/20');
+                }, 2000);
+            } catch (err) {
+                console.error('Failed to copy', err);
+                alert('Failed to copy to clipboard.');
+            }
+        });
+    }
+
+    // Search redirection
+    const searchInput = document.getElementById('hero-search-input');
+    if (searchInput) {
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && this.value.trim() !== '') {
+                window.location.href = `items.html?search=${encodeURIComponent(this.value.trim())}`;
+            }
+        });
+    }
+
+    console.log('Fetching recent items from /api/items...');
+    try {
+        const res = await fetch('/api/items');
+        console.log('Response status:', res.status);
+        if (res.ok) {
+            const responseData = await res.json();
+            console.log('Received data:', responseData);
+            
+            const data = Array.isArray(responseData) ? responseData : (responseData.data || []);
+            console.log('Parsed data array:', data);
+            
+            const grid = document.getElementById('recent-items-grid');
+            if (data && Array.isArray(data)) {
+                grid.innerHTML = '';
+                if (data.length === 0) {
+                     grid.innerHTML = '<p class="text-slate-500 col-span-full py-10 font-medium text-center">No recent items found.</p>';
+                } else {
+                    data.slice(0, 4).forEach(item => {
+                        const isFound = item.type === 'found';
+                        const isResolved = item.status === 'resolved';
+                        const badgeBg = isFound ? 'bg-emerald-500' : 'bg-rose-500';
+                        const resolvedOpacity = isResolved ? 'opacity-60' : '';
+                        const resolvedGrayscale = isResolved ? 'grayscale' : '';
+                        const resolvedBadge = isResolved ? `<span class="absolute top-4 right-4 bg-slate-800 text-white text-[10px] font-bold px-2 py-1 rounded-sm uppercase tracking-widest shadow-lg z-10">Resolved</span>` : '';
+                        
+                        const card = `
+                        <div class="bg-white rounded-custom shadow-sm border border-slate-200 overflow-hidden flex flex-col item-card-hover btn-transition group cursor-pointer ${resolvedOpacity}" data-purpose="item-card">
+                            <div class="relative aspect-[4/3] bg-slate-100 overflow-hidden">
+                                <img src="${item.image_url || 'https://via.placeholder.com/300'}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ${resolvedGrayscale}"/>
+                                <span class="absolute top-4 left-4 ${badgeBg} text-white text-[10px] font-bold px-2 py-1 rounded-sm uppercase tracking-widest shadow-lg z-10">${item.type}</span>
+                                ${resolvedBadge}
+                            </div>
+                            <div class="p-5 flex-grow">
+                                <h3 class="font-bold text-xl mb-2 text-slate-800 group-hover:text-brand transition-colors line-clamp-1">${item.title}</h3>
+                                <p class="text-slate-500 text-sm mb-4 line-clamp-2 font-medium">${item.description}</p>
+                                <div class="flex items-center text-xs text-slate-400 font-semibold uppercase tracking-wide gap-1.5">
+                                    <svg class="h-4 w-4 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                                    <span>${item.location}</span>
+                                </div>
+                            </div>
+                            <div class="px-5 py-4 bg-slate-50/50 border-t border-slate-100 flex justify-between items-center">
+                                <span class="text-xs text-slate-400 font-medium">${item.item_date ? new Date(item.item_date).toLocaleDateString() : ''}</span>
+                                <div class="flex gap-3 items-center">
+                                    <button onclick="showContactModal('${item.contact_email}')" class="text-slate-400 hover:text-brand transition-colors" title="Reveal Contact Details">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                                    </button>
+                                    <button onclick="window.location.href='item-details.html?id=${item.id}'" class="text-brand text-sm font-extrabold uppercase tracking-tight group-hover:underline">Details</button>
+                                </div>
+                            </div>
+                        </div>`;
+                        grid.insertAdjacentHTML('beforeend', card);
+                    });
+                }
+            }
+        }
+    } catch(e) { console.error('Failed to fetch items', e); }
+});
+</script>
+</html>

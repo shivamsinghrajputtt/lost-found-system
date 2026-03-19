@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Post Found Item - College Lost &amp; Found</title>
+<!-- Tailwind CSS v3 with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'ui-sans-serif', 'system-ui'],
+                    },
+                    colors: {
+                        college: {
+                            primary: '#0d6cf2', // From THEME_7
+                            secondary: '#60a5fa',
+                            accent: '#f59e0b'
+                        }
+                    },
+                    borderRadius: {
+                        'college': '8px', // ROUND_EIGHT from THEME_7
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .form-input-focus {
+            @apply focus:ring-2 focus:ring-college-primary focus:ring-offset-0 focus:border-college-primary transition-all duration-200;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen font-sans text-gray-900">
+<!-- BEGIN: MainHeader -->
+<header class="bg-college-primary text-white p-4 sticky top-0 z-50 shadow-sm">
+<div class="max-w-md mx-auto flex items-center justify-between">
+<button onclick="window.location.href='index.html'" aria-label="Go back" class="p-2 hover:bg-blue-700/50 rounded-full transition-colors">
+<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+<h1 class="text-xl font-bold tracking-tight">Report Found Item</h1>
+<div class="w-10"></div> <!-- Spacer for centering title -->
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: MainContent -->
+<main class="max-w-md mx-auto p-5 pb-24">
+<!-- BEGIN: FormIntroduction -->
+<section class="mb-8">
+<h2 class="text-2xl font-bold text-gray-900">Item Details</h2>
+<p class="text-sm text-gray-500 mt-2 leading-relaxed">Help return an item to its owner by providing accurate details about what you found.</p>
+</section>
+<!-- END: FormIntroduction -->
+<!-- BEGIN: PostFoundItemForm -->
+<form class="space-y-6" id="found-item-form">
+<!-- BEGIN: BasicInfoSection -->
+<section class="bg-white p-6 rounded-college shadow-sm border border-gray-100 space-y-5">
+<!-- Item Name -->
+<div data-purpose="form-group">
+<label class="block text-sm font-semibold text-gray-700 mb-1.5" for="item-name">Item Name *</label>
+<input class="w-full rounded-college border-gray-200 shadow-sm form-input-focus py-2.5 sm:text-sm" id="item-name" name="item_name" placeholder="e.g., Blue Hydro Flask, Sony Headphones" required="" type="text"/>
+</div>
+<!-- Category Dropdown -->
+<div data-purpose="form-group">
+<label class="block text-sm font-semibold text-gray-700 mb-1.5" for="category">Category *</label>
+<select class="w-full rounded-college border-gray-200 shadow-sm form-input-focus py-2.5 sm:text-sm" id="category" name="category" required="">
+<option disabled="" selected="" value="">Select a category</option>
+<option value="electronics">Electronics</option>
+<option value="clothing">Clothing &amp; Accessories</option>
+<option value="keys">Keys</option>
+<option value="wallets">Wallets &amp; IDs</option>
+<option value="books">Books &amp; Stationery</option>
+<option value="other">Other</option>
+</select>
+</div>
+<!-- Description -->
+<div data-purpose="form-group">
+<label class="block text-sm font-semibold text-gray-700 mb-1.5" for="description">Description *</label>
+<textarea class="w-full rounded-college border-gray-200 shadow-sm form-input-focus py-2.5 sm:text-sm" id="description" name="description" placeholder="Describe distinguishing features (scratches, stickers, etc.)" required="" rows="3"></textarea>
+</div>
+</section>
+<!-- END: BasicInfoSection -->
+<!-- BEGIN: LocationDateSection -->
+<section class="bg-white p-6 rounded-college shadow-sm border border-gray-100 space-y-5">
+<!-- Location Found -->
+<div data-purpose="form-group">
+<label class="block text-sm font-semibold text-gray-700 mb-1.5" for="location">Location Found *</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<svg class="h-5 w-5 text-gray-400" fill="currentColor" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" fill-rule="evenodd"></path>
+</svg>
+</div>
+<input class="w-full pl-10 rounded-college border-gray-200 shadow-sm form-input-focus py-2.5 sm:text-sm" id="location" name="location" placeholder="e.g., Library 2nd Floor, West Quad" required="" type="text"/>
+</div>
+</div>
+<!-- Date Found -->
+<div data-purpose="form-group">
+<label class="block text-sm font-semibold text-gray-700 mb-1.5" for="date-found">Date Found *</label>
+<input class="w-full rounded-college border-gray-200 shadow-sm form-input-focus py-2.5 sm:text-sm" id="date-found" name="date_found" required="" type="date"/>
+</div>
+</section>
+<!-- END: LocationDateSection -->
+<!-- BEGIN: ImageUploadSection -->
+<section class="bg-white p-6 rounded-college shadow-sm border border-gray-100">
+<label class="block text-sm font-semibold text-gray-700 mb-3">Upload Image</label>
+<div class="mt-1 flex justify-center px-6 pt-6 pb-7 border-2 border-gray-200 border-dashed rounded-college hover:border-college-primary hover:bg-blue-50/30 transition-all cursor-pointer group" id="drop-zone">
+<div class="space-y-2 text-center">
+<svg aria-hidden="true" class="mx-auto h-12 w-12 text-gray-400 group-hover:text-college-primary transition-colors" fill="none" stroke="currentColor" viewbox="0 0 48 48">
+<path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<div class="flex text-sm text-gray-600 justify-center">
+<label class="relative cursor-pointer bg-transparent rounded-md font-semibold text-college-primary hover:text-blue-700 focus-within:outline-none" for="file-upload">
+<span>Upload a file</span>
+<input accept="image/*" class="sr-only" id="file-upload" name="file-upload" type="file"/>
+</label>
+<p class="pl-1">or drag and drop</p>
+</div>
+<p class="text-xs text-gray-400">PNG, JPG up to 10MB</p>
+</div>
+</div>
+<!-- Simple preview container (hidden initially) -->
+<div class="mt-4 hidden" id="image-preview">
+<p class="text-xs font-bold text-gray-400 mb-2 uppercase tracking-wider">Preview:</p>
+<img alt="Preview" class="w-full h-48 object-cover rounded-college border border-gray-100 shadow-inner" src=""/>
+</div>
+</section>
+<!-- END: ImageUploadSection -->
+<!-- BEGIN: ContactInfoSection -->
+<section class="bg-white p-6 rounded-college shadow-sm border border-gray-100 space-y-5">
+<h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest">Your Contact Info</h3>
+<div data-purpose="form-group">
+<label class="block text-sm font-semibold text-gray-700 mb-1.5" for="contact-name">Name</label>
+<input class="w-full rounded-college border-gray-200 shadow-sm form-input-focus py-2.5 sm:text-sm" id="contact-name" name="contact_name" placeholder="Your full name" type="text"/>
+</div>
+<div data-purpose="form-group">
+<label class="block text-sm font-semibold text-gray-700 mb-1.5" for="contact-email">College Email *</label>
+<input class="w-full rounded-college border-gray-200 shadow-sm form-input-focus py-2.5 sm:text-sm" id="contact-email" name="contact_email" placeholder="student@college.edu" required="" type="email"/>
+</div>
+<div class="flex items-start bg-gray-50 p-3 rounded-college">
+<div class="flex items-center h-5">
+<input class="focus:ring-college-primary h-4 w-4 text-college-primary border-gray-300 rounded-sm" id="privacy-policy" name="privacy-policy" required="" type="checkbox"/>
+</div>
+<div class="ml-3 text-xs leading-normal">
+<label class="text-gray-600" for="privacy-policy">I agree to be contacted by the potential owner or campus security regarding this item.</label>
+</div>
+</div>
+</section>
+<!-- END: ContactInfoSection -->
+<!-- BEGIN: SubmitAction -->
+<div class="pt-2">
+<button class="w-full flex justify-center py-4 px-4 border border-transparent rounded-college shadow-md text-base font-bold text-white bg-college-primary hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-200 active:scale-[0.99] transition-all transform" type="submit">
+                Submit Found Item
+            </button>
+<div class="mt-6 p-4 border border-blue-100 bg-blue-50/50 rounded-college">
+<p class="text-center text-xs text-blue-700/80 leading-relaxed">
+<span class="font-bold">Security Note:</span> Please consider handing high-value items like wallets or laptops directly to the Campus Security Office.
+                </p>
+</div>
+</div>
+<!-- END: SubmitAction -->
+</form>
+<!-- END: PostFoundItemForm -->
+</main>
+<!-- END: MainContent -->
+<!-- BEGIN: ImagePreviewScript -->
+<script data-purpose="image-preview-handler">
+    const fileInput = document.getElementById('file-upload');
+    const previewContainer = document.getElementById('image-preview');
+    const previewImage = previewContainer.querySelector('img');
+
+    fileInput.addEventListener('change', function() {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                previewImage.src = e.target.result;
+                previewContainer.classList.remove('hidden');
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
+<script>
+    document.getElementById('found-item-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const submitBtn = this.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Submitting...';
+        
+        const formData = new FormData();
+        formData.append('type', 'found');
+        formData.append('title', document.getElementById('item-name').value);
+        formData.append('category', document.getElementById('category').value);
+        formData.append('description', document.getElementById('description').value);
+        formData.append('location', document.getElementById('location').value);
+        formData.append('date', document.getElementById('date-found').value);
+        formData.append('contact_name', document.getElementById('contact-name').value || 'Anonymous');
+        formData.append('contact_email', document.getElementById('contact-email').value);
+        
+        const fileInputElem = document.getElementById('file-upload');
+        if (fileInputElem.files.length > 0) {
+            formData.append('image', fileInputElem.files[0]);
+        }
+        
+        try {
+            const res = await fetch('/api/items', {
+                method: 'POST',
+                body: formData
+            });
+            
+            if (res.ok) {
+                alert('Found item reported successfully!');
+                window.location.href = 'items.html';
+            } else {
+                const data = await res.json();
+                alert('Error submitting report: ' + (data.error || 'Unknown error. Make sure Supabase is configured in .env'));
+            }
+        } catch (err) {
+            alert('Error network request failed: ' + err.message);
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Submit Found Item';
+        }
+    });
+</script>
+<!-- END: ImagePreviewScript -->
+</body></html>
